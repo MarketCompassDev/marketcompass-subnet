@@ -11,6 +11,10 @@ MC_BEARER_TOKEN - Bearer token for twitter pro api.
 `export MC_SUBNET_API_X_API_KEY=`
 
 ## Environment Validator Variables
+MC_SUBNET_API_X_API_KEY - MarketCompass API key, please contact via discord-ticket to get a new one [Subnet 17 Discord Server](https://discord.gg/9KXf3BMCJA).
+`export MC_SUBNET_API_X_API_KEY=`
+
+In request please provide: `module_id` `module_ip` `is_validator` `discord_user`
 
 MC_SUBNET_API_URL - URL to current version of the used api
 `export MC_SUBNET_API_URL=https://api3.subnet.marketcompass.ai`
