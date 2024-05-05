@@ -1,4 +1,4 @@
-# Market Compass Subnet code based on Commune Subnet Templeate
+# Market Compass Subnet code based on Commune Subnet Template
 
 Market Compass Subnet built on top of [CommuneX](https://github.com/agicommies/communex).
 Learn how to structure, build and deploy a subnet on [Commune AI](https://communeai.org/)!
