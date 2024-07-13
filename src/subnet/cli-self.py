@@ -5,11 +5,10 @@ from communex._common import get_node_url  # type: ignore
 from communex.client import CommuneClient  # type: ignore
 from communex.compat.key import classic_load_key  # type: ignore
 
-from validator._config import ValidatorSettings
-from validator.validator import get_subnet_netuid, TwitterValidator
+from selfvalidator._config import ValidatorSettings
+from selfvalidator.selfvalidator import get_subnet_netuid, SelfTwitterValidator
 
 app = typer.Typer()
-
 
 @app.command("serve-subnet")
 def serve(
@@ -22,14 +21,13 @@ def serve(
     settings = ValidatorSettings()  # type: ignore
     c_client = CommuneClient(get_node_url())
     subnet_uid = get_subnet_netuid(c_client)
-    validator = TwitterValidator(
+    validator = SelfTwitterValidator(
         keypair,
         subnet_uid,
         c_client,
         call_timeout=call_timeout,
     )
     validator.validation_loop(settings)
-
 
 if __name__ == "__main__":
     typer.run(serve)

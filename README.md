@@ -1,29 +1,38 @@
-# Market Compass Subnet code based on Commune Subnet Template
+---
 
-Market Compass Subnet built on top of [CommuneX](https://github.com/agicommies/communex).
-Learn how to structure, build and deploy a subnet on [Commune AI](https://communeai.org/)!
+# Market Compass Subnet
 
-## Environment Miner Variables
+This is the Market Compass Subnet, built on top of [CommuneX](https://github.com/agicommies/communex). Learn how to structure, build, and deploy a subnet on [Commune AI](https://communeai.org/)!
 
-MC_BEARER_TOKEN - Bearer token for twitter pro api.
-`export MC_BEARER_TOKEN=AAA...`
+You can find detailed information about the project on our [project page](https://marketcompass.ai).
+- Documentation is available [here](https://docs.marketcompass.ai/subnet/subnet-17).
+- Subnet miners statistics can be found [here](http://stats.subnet.marketcompass.ai).
+- A early swagger version of data retrieval from miners is available [here](https://data.marketcompass.ai/swagger).
 
-`export MC_SUBNET_API_X_API_KEY=`
 
-## Environment Validator Variables
-MC_SUBNET_API_X_API_KEY - MarketCompass API key, please contact via discord-ticket to get a new one [Subnet 17 Discord Server](https://discord.gg/9KXf3BMCJA).
-`export MC_SUBNET_API_X_API_KEY=`
+## Environment Variables for Miner
 
-In request please provide: `module_id` `module_ip` `is_validator` `discord_user`
+### MC_BEARER_TOKEN
+Bearer token for Twitter Pro API.
 
-MC_SUBNET_API_URL - URL to current version of the used api
-`export MC_SUBNET_API_URL=https://api3.subnet.marketcompass.ai`
+Set it with:
+```sh
+export MC_BEARER_TOKEN=YOUR_BEARER_TOKEN
+```
+
+### MC_SUBNET_API_URL
+URL for the current version of the API.
+
+Set it with:
+```sh
+export MC_SUBNET_API_URL=https://api3.subnet.marketcompass.ai
+```
 
 ## Dependencies
-The whole subnet is built on top of the [CommuneX library / SDK](https://github.com/agicommies/communex).
-Which is truly the only essential dependency.
-You can find the whole dependency list we used in the [requirements.txt](requirements.txt) file.
 
+The entire subnet is built on top of the [CommuneX library / SDK](https://github.com/agicommies/communex), which is the primary dependency. You can find the complete list of dependencies in the [requirements.txt](requirements.txt) file.
+
+Here are the main dependencies:
 ```txt
 communex
 typer
@@ -32,32 +41,64 @@ keylimiter
 pydantic-settings
 ```
 
-## Miner
+## Running the Miner
 
-From the root of your project, you can just call **comx module serve**. For example:
-
+From the root of your project, start the miner with the following command:
 ```sh
-comx module serve subnet.miner.model.Miner <name-of-your-com-key> --subnets-whitelist 17 --ip 0.0.0.0 --port 8000
+comx module serve subnet.miner.model.Miner <your-com-key> --subnets-whitelist 17 --ip 0.0.0.0 --port 8000
 ```
 
-To register the miner use:
+To register the miner, use:
 ```sh
-comx module register <name-of-your-miner> <name-of-your-com-key> --ip <your-ip-of-the-server> --port 8000 --netuid 17  
+comx module register <your-miner-name> <your-com-key> --ip <your-server-ip> --port 8000 --netuid 17
 ```
 
-## Validator
+## Quick Start for Validator
 
-To run the validator, just call the file in which you are executing `validator.validate_loop()`. For example:
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/MarketCompassDev/marketcompass-subnet.git
+    ```
 
-```sh
-python3 -m market-compass-subnet.subnet.cli <name-of-your-com-key>
-```
+2. Install required libraries:
+    ```sh
+    apt install python3-pip
+    pip install poetry
+    pip install communex --upgrade
+    apt install nodejs
+    apt install npm
+    npm install pm2 -g
+    ```
 
-To register the validator use:
-```sh
-comx module register market-compass::<your-vali-name> <name-of-your-com-key> --netuid 17  
-```
+3. Go to the project directory and install dependencies:
+    ```sh
+    cd marketcompass-subnet
+    pip install -r requirements.txt
+    cd src/subnet
+    ```
 
-## Further reading
-For full documentation of the Commune AI ecosystem, please visit the [Official Commune Page](https://communeai.org/),
-and it's developer documentation. There you can learn about all subnet details, deployment, and more!
+4. Register the validator:
+    ```sh
+    comx module register YOUR_VALI_NAME YOUR_VALI_KEY --netuid 17
+    # Example:
+    # comx module register market-compass::vali1 mykey --netuid 17
+    export MC_SUBNET_API_URL=https://api3.subnet.marketcompass.ai
+    ```
+
+5. Start the validator:
+    - Without Twitter API key (validated by the master validator):
+        ```sh
+        python3 -m subnet.cli-sub YOUR_VALI_KEY
+        ```
+
+    - With Twitter API key (self-validation):
+        ```sh
+        export MC_BEARER_TOKEN=YOUR_TWITTER_BEARER_TOKEN
+        python3 -m subnet.cli-sub YOUR_VALI_KEY
+        ```
+
+## Further Reading
+
+For comprehensive documentation on the Commune AI ecosystem, visit the [Official Commune Page](https://communeai.org/) and its developer documentation. There, you can learn about all subnet details, deployment processes, and more.
+
+---
